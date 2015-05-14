@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 
 public class FirstActivity extends ActionBarActivity {
@@ -15,7 +16,42 @@ public class FirstActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        createHeaderRow();
+        createFirstRow();
+        setContentView(R.layout.activity_one);
+        createAdderButton();
+    }
+
+    private void createHeaderRow() {
+
+    }
+
+    private void createFirstRow() {
+
+    }
+
+    private void createAdderButton() {
+        Button b = new Button(this);
+        b.setText("Add new class");
+        b.setOnClickListener(getAdderClickListener());
+        RelativeLayout ll = (RelativeLayout)findViewById(R.id.main_relative);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        ll.addView(b, lp);
+    }
+
+    private View.OnClickListener getAdderClickListener() {
+        /*View.OnClickListener ocl = new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        };
+        return ocl;*/
+        return e -> lol();
+    }
+
+    private void lol() {
+
     }
 
     @Override

@@ -13,7 +13,7 @@ public class SecondActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blue);
+        setContentView(R.layout.activity_two);
     }
 
     @Override
