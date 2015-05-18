@@ -15,26 +15,76 @@
         android:id="@+id/button2"
         android:onClick="onButtonClick"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp" />
-
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#888888"
-        android:id="@+id/textView3"
-        android:editable="false"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
+        android:text="I need a"
         android:id="@+id/textView4"
         android:editable="true"
-        android:layout_above="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="94"
+        android:id="@+id/gradeRequired"
+        android:editable="true"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="on my final to get a(n)"
+        android:id="@+id/textView2"
+        android:editable="true"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/gradeRequired"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_centerVertical="true"
+        android:max="100"
+        android:indeterminate="false"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:progress="93" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="93"
+        android:id="@+id/gradeGoal"
+        android:layout_below="@+id/seekBar"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="in the class"
+        android:id="@+id/textView6"
+        android:editable="true"
+        android:layout_marginTop="41dp"
+        android:textSize="30dp"
+        android:layout_below="@+id/gradeGoal"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

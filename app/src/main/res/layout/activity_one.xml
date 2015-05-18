@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/main_relative"
-    android:background="#ff64ff59">
+    android:background="#ff8dff90">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,28 +17,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView"
-            android:layout_above="@+id/textView2"
-            android:layout_centerHorizontal="true"
-            android:editable="true"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#888888"
-            android:id="@+id/textView2"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:editable="false"
-            android:layout_gravity="center_horizontal" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,10 +25,10 @@
             android:layout_below="@+id/textView2"
             android:layout_marginTop="57dp"
             android:onClick="buttonOnClick"
-            android:layout_alignRight="@+id/textView"
-            android:layout_alignEnd="@+id/textView"
-            android:layout_alignLeft="@+id/textView"
-            android:layout_alignStart="@+id/textView"
+            android:layout_alignRight="@+id/gradeRequired"
+            android:layout_alignEnd="@+id/gradeRequired"
+            android:layout_alignLeft="@+id/gradeRequired"
+            android:layout_alignStart="@+id/gradeRequired"
             android:layout_weight="0.03"
             android:layout_gravity="center_horizontal" />
 
@@ -61,7 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1"
-        android:layout_marginTop="34dp"
         android:layout_below="@+id/linearLayout0"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"></LinearLayout>
@@ -77,22 +54,40 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Number of classes:"
+                android:text="Number of sections:"
                 android:id="@+id/textView5"
                 android:textColor="#ff000000" />
 
-            <view
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="35dp"
+                android:layout_height="match_parent"></RelativeLayout>
+
+            <EditText
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                class="com.example.nataliechanfreau.myapplication.CustomNumberPicker"
-                android:id="@+id/view"
-                android:orientation="vertical" />
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/classesText"
+                android:selectAllOnFocus="true" />
+
+            <RelativeLayout
+                android:layout_width="26dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.23"></RelativeLayout>
+
+            <Button
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:text="GO!"
+                android:id="@+id/classesButton"
+                android:onClick="classesButtonOnClick" />
 
         </LinearLayout>
     </LinearLayout>
