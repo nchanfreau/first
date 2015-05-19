@@ -29,17 +29,8 @@ public class FirstActivity extends ActionBarActivity {
         setContentView(R.layout.activity_one);
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
     public void buttonOnClick(View v) {
         Button b = (Button) v;
-        //b.setText("clicked!");
-        //this.findViewById(R.id.natalie_layout).setBackgroundColor(Color.RED);
 
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra(EXTRA_MESSAGE, "teehee");
@@ -66,9 +57,6 @@ public class FirstActivity extends ActionBarActivity {
                     InputType.TYPE_CLASS_NUMBER, ROW_TEXT_SIZE);
             TextView percent2 = makeSimpleTextView(PERCENT_SYMBOL, ROW_TEXT_SIZE);
 
-            //final int id_ = btn.getId();
-            //((LinearLayout) findViewById(R.id.linearLayout1)).addView(tv);
-
             row.addView(section);
             row.addView(proportion);
             row.addView(percent);
@@ -78,21 +66,6 @@ public class FirstActivity extends ActionBarActivity {
             ((LinearLayout) findViewById(R.id.linearLayout1)).addView(row);
 
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private LinearLayout createLinearLayout(){
