@@ -4,27 +4,19 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
 public class FirstActivity extends ActionBarActivity {
-    public static final String CURRENT_PERCENT_MESSAGE = "Current percent";
-    public static final String REMAINING_PROPORTION_MESSAGE = "Remaining proportion";
     private static final int MAX_SECTIONS = 7;
-    private static final int PROPORTION_AMT = 100;
-    private static final int GRADE_AMT = 200;
+    private static final int PROPORTION_AMT_ID = 100;
+    private static final int GRADE_AMT_ID = 200;
     private static final float ROW_TEXT_SIZE = 25;
     private static final float TITLE_TEXT_SIZE = 20;
-    private static final String SECTION_STRING = "Section ";
-    private static final String PROPORTION_STRING = "Proportion";
-    private static final String GRADE_STRING = "Grade";
-    private static final String PERCENT_SYMBOL = "%";
     private static final String SAMPLE_PROPORTION = "20";
     private static final String SAMPLE_GRADE = "88";
 
@@ -37,16 +29,14 @@ public class FirstActivity extends ActionBarActivity {
     }
 
     public void buttonOnClick(View v) {
-        Button b = (Button) v;
-
         double[] result = doMathOnUserInput();
 
         double currentPercent = result[0];
         double remainingProportion = result[1];
 
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra(CURRENT_PERCENT_MESSAGE, currentPercent);
-        intent.putExtra(REMAINING_PROPORTION_MESSAGE, remainingProportion);
+        intent.putExtra(Constants.CURRENT_PERCENT_MESSAGE, currentPercent);
+        intent.putExtra(Constants.REMAINING_PROPORTION_MESSAGE, remainingProportion);
         startActivity(intent);
     }
 
@@ -57,9 +47,9 @@ public class FirstActivity extends ActionBarActivity {
         double remainingProportion = 100;
 
         for (int i = 1; i <= myNumRows; i++) {
-            double proportion = Double.parseDouble(((EditText) findViewById(PROPORTION_AMT + i)).
+            double proportion = Double.parseDouble(((EditText) findViewById(PROPORTION_AMT_ID + i)).
                     getText().toString());
-            double grade = Double.parseDouble(((EditText) findViewById(GRADE_AMT + i)).
+            double grade = Double.parseDouble(((EditText) findViewById(GRADE_AMT_ID + i)).
                     getText().toString());
 
             remainingProportion -= proportion;
@@ -91,7 +81,8 @@ public class FirstActivity extends ActionBarActivity {
 
     private LinearLayout createTitleRow() {
         LinearLayout row = createLinearLayout();
-        String title = SECTION_STRING + "\t" + PROPORTION_STRING + "\t" + GRADE_STRING;
+        String title = Constants.SECTION_STRING + "\t" + Constants.PROPORTION_STRING +
+                "\t" + Constants.GRADE_STRING;
         TextView titleView = makeSimpleTextView(title, TITLE_TEXT_SIZE);
         addToViewGroup(row, titleView);
 
@@ -119,15 +110,14 @@ public class FirstActivity extends ActionBarActivity {
 
     private LinearLayout createSingleSectionRow(int i) {
         LinearLayout row = createLinearLayout();
-        TextView section = makeSimpleTextView(SECTION_STRING + i, ROW_TEXT_SIZE);
-        EditText proportion = makeEditText(PROPORTION_AMT + i, SAMPLE_PROPORTION,
+        TextView section = makeSimpleTextView(Constants.SECTION_STRING + i, ROW_TEXT_SIZE);
+        EditText proportion = makeEditText(PROPORTION_AMT_ID + i, SAMPLE_PROPORTION,
+                Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+        TextView percent = makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE);
+        EditText grade = makeEditText(GRADE_AMT_ID + i, SAMPLE_GRADE,
                 InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER,
                 ROW_TEXT_SIZE);
-        TextView percent = makeSimpleTextView(PERCENT_SYMBOL, ROW_TEXT_SIZE);
-        EditText grade = makeEditText(GRADE_AMT + i, SAMPLE_GRADE,
-                InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER,
-                ROW_TEXT_SIZE);
-        TextView percent2 = makeSimpleTextView(PERCENT_SYMBOL, ROW_TEXT_SIZE);
+        TextView percent2 = makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE);
 
         addToViewGroup(row, section, proportion, percent, grade, percent2);
 

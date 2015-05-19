@@ -1,10 +1,7 @@
 package com.example.nataliechanfreau.myapplication;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -27,8 +24,8 @@ public class SecondActivity extends ActionBarActivity {
     }
 
     private void interpretMessage() {
-        myCurrentPercent = (double) getIntent().getExtras().get(FirstActivity.CURRENT_PERCENT_MESSAGE);
-        myRemainingProportion = (double) getIntent().getExtras().get(FirstActivity.REMAINING_PROPORTION_MESSAGE);
+        myCurrentPercent = (double) getIntent().getExtras().get(Constants.CURRENT_PERCENT_MESSAGE);
+        myRemainingProportion = (double) getIntent().getExtras().get(Constants.REMAINING_PROPORTION_MESSAGE);
     }
 
     public void onButtonClick(View view) {
