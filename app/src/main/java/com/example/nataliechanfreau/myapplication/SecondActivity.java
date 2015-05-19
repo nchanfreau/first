@@ -9,7 +9,12 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class SecondActivity extends ActionBarActivity {
+    private static final int NUM_DECIMALS_TO_ROUND = 2;
+
     private double myCurrentPercent;
     private double myRemainingProportion;
 
@@ -51,10 +56,19 @@ public class SecondActivity extends ActionBarActivity {
     }
 
     private void setGradeRequired(int gradeGoal) {
-        double gradeRequired = (gradeGoal - myCurrentPercent) / myRemainingProportion * 100.0;
-        gradeRequired = gradeRequired < 0 ? 0 : gradeRequired;
-        //gradeRequired = ((int) (gradeRequired * 100)) / 100.0;
+        double gradeRequired = calculateGradeRequired(gradeGoal);
         TextView gradeRequiredTextView = (TextView) findViewById(R.id.gradeRequired);
         gradeRequiredTextView.setText(gradeRequired + "%");
+    }
+
+    private double calculateGradeRequired(int gradeGoal) {
+        double gradeRequired = (gradeGoal - myCurrentPercent) / myRemainingProportion * 100.0;
+        gradeRequired = gradeRequired < 0 ? 0 : gradeRequired;
+
+        BigDecimal tempGradeRequired = BigDecimal.valueOf(gradeRequired).
+                setScale(NUM_DECIMALS_TO_ROUND, RoundingMode.HALF_UP);
+        double roundedGradeRequired = tempGradeRequired.doubleValue();
+
+        return roundedGradeRequired;
     }
 }

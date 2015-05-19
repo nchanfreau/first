@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class FirstActivity extends ActionBarActivity {
     public static final String CURRENT_PERCENT_MESSAGE = "Current percent";
     public static final String REMAINING_PROPORTION_MESSAGE = "Remaining proportion";
-    private static final int MAX_SECTIONS = 6;
+    private static final int MAX_SECTIONS = 7;
     private static final int PROPORTION_AMT = 100;
     private static final int GRADE_AMT = 200;
     private static final float ROW_TEXT_SIZE = 25;
@@ -121,10 +121,12 @@ public class FirstActivity extends ActionBarActivity {
         LinearLayout row = createLinearLayout();
         TextView section = makeSimpleTextView(SECTION_STRING + i, ROW_TEXT_SIZE);
         EditText proportion = makeEditText(PROPORTION_AMT + i, SAMPLE_PROPORTION,
-                InputType.TYPE_CLASS_NUMBER, ROW_TEXT_SIZE);
+                InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER,
+                ROW_TEXT_SIZE);
         TextView percent = makeSimpleTextView(PERCENT_SYMBOL, ROW_TEXT_SIZE);
         EditText grade = makeEditText(GRADE_AMT + i, SAMPLE_GRADE,
-                InputType.TYPE_CLASS_NUMBER, ROW_TEXT_SIZE);
+                InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER,
+                ROW_TEXT_SIZE);
         TextView percent2 = makeSimpleTextView(PERCENT_SYMBOL, ROW_TEXT_SIZE);
 
         addToViewGroup(row, section, proportion, percent, grade, percent2);
