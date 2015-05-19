@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/main_relative"
-    android:background="#ff8dff90">
+    android:background="#4f55b11b">
 
     <LinearLayout
         android:orientation="vertical"
