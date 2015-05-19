@@ -11,19 +11,25 @@ import android.widget.TextView;
 
 
 public class SecondActivity extends ActionBarActivity {
+    private double myCurrentPercent;
+    private double myRemainingProportion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
+        interpretMessage();
         initializeSeekBar();
     }
 
+    private void interpretMessage() {
+        String message = (String) getIntent().getExtras().get(FirstActivity.EXTRA_MESSAGE);
+        String[] percentages = message.split(FirstActivity.DELIMITER);
+        myCurrentPercent = Double.parseDouble(percentages[0]);
+        myRemainingProportion = Double.parseDouble(percentages[1]);
+    }
+
     public void onButtonClick(View view) {
-
-        //Intent intent = new Intent(this, FirstActivity.class);
-        //this.startActivity(intent);
-
         this.finish();
     }
 
@@ -41,7 +47,16 @@ public class SecondActivity extends ActionBarActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 TextView gradeGoal = (TextView) findViewById(R.id.gradeGoal);
                 gradeGoal.setText(Integer.toString(seekBar.getProgress()));
+                setGradeRequired();
             }
         });
+        setGradeRequired();
+    }
+
+    private void setGradeRequired() {
+        TextView gradeRequired = (TextView) findViewById(R.id.gradeRequired);
+
+        
+
     }
 }

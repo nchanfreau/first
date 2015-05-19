@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 public class FirstActivity extends ActionBarActivity {
     public static final String EXTRA_MESSAGE = "com.example.nataliechanfreau.myapplication.MESSAGE";
+    public static final String DELIMITER = " ";
     private static final int MAX_SECTIONS = 6;
     private static final int PROPORTION_AMT = 100;
     private static final int GRADE_AMT = 200;
@@ -44,7 +45,7 @@ public class FirstActivity extends ActionBarActivity {
         double remainingProportion = result[1];
 
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, currentPercent + " " + remainingProportion);
+        intent.putExtra(EXTRA_MESSAGE, currentPercent + DELIMITER + remainingProportion);
         startActivity(intent);
     }
 
