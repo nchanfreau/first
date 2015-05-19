@@ -19,34 +19,12 @@ public class SecondActivity extends ActionBarActivity {
         initializeSeekBar();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_blue, menu);
-        return true;
-    }
-
     public void onButtonClick(View view) {
 
         //Intent intent = new Intent(this, FirstActivity.class);
         //this.startActivity(intent);
 
         this.finish();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void initializeSeekBar() {
@@ -62,7 +40,6 @@ public class SecondActivity extends ActionBarActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 TextView gradeGoal = (TextView) findViewById(R.id.gradeGoal);
-                //int b = seekBar.getProgress();
                 gradeGoal.setText(Integer.toString(seekBar.getProgress()));
             }
         });
