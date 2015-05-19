@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -37,7 +38,17 @@ public class FirstActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    public void classesButtonOnClick(View v ) {
+    public void classesButtonOnClick(View v) {
+        addTitleRow();
+        int num = calculateNumRows();
+        addSectionRows(num);
+    }
+
+    private void addTitleRow() {
+
+    }
+
+    private int calculateNumRows() {
         EditText classesText = (EditText) this.findViewById(R.id.classesText);
         int num = Integer.parseInt(classesText.getText().toString());
 
@@ -45,6 +56,11 @@ public class FirstActivity extends ActionBarActivity {
             classesText.setText("" + MAX_SECTIONS);
             num = MAX_SECTIONS;
         }
+
+        return num;
+    }
+
+    private void addSectionRows(int num) {
         ((LinearLayout) findViewById(R.id.linearLayout1)).removeAllViews();
         for (int i = 1; i <= num; i++) {
             LinearLayout row = createLinearLayout();
@@ -57,14 +73,16 @@ public class FirstActivity extends ActionBarActivity {
                     InputType.TYPE_CLASS_NUMBER, ROW_TEXT_SIZE);
             TextView percent2 = makeSimpleTextView(PERCENT_SYMBOL, ROW_TEXT_SIZE);
 
-            row.addView(section);
-            row.addView(proportion);
-            row.addView(percent);
-            row.addView(grade);
-            row.addView(percent2);
+            addToViewGroup(row, section, proportion, percent, grade, percent2);
 
             ((LinearLayout) findViewById(R.id.linearLayout1)).addView(row);
 
+        }
+    }
+
+    private void addToViewGroup(ViewGroup view, View ... children) {
+        for (View child : children) {
+            view.addView(child);
         }
     }
 
