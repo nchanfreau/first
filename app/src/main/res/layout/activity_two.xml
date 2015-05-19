@@ -11,7 +11,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Green please"
+        android:text="Go back"
         android:id="@+id/button2"
         android:onClick="onButtonClick"
         android:layout_alignParentBottom="true"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="I need a"
+        android:text="I need a(n)"
         android:id="@+id/textView4"
         android:editable="true"
         android:layout_alignParentTop="true"

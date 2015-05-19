@@ -20,7 +20,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blue please"
+            android:text="Calculate!"
             android:id="@+id/button"
             android:layout_below="@+id/textView2"
             android:layout_marginTop="57dp"

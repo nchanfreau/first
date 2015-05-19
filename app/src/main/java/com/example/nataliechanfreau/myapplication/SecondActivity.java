@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-
 public class SecondActivity extends ActionBarActivity {
     private double myCurrentPercent;
     private double myRemainingProportion;
@@ -23,10 +22,8 @@ public class SecondActivity extends ActionBarActivity {
     }
 
     private void interpretMessage() {
-        String message = (String) getIntent().getExtras().get(FirstActivity.EXTRA_MESSAGE);
-        String[] percentages = message.split(FirstActivity.DELIMITER);
-        myCurrentPercent = Double.parseDouble(percentages[0]);
-        myRemainingProportion = Double.parseDouble(percentages[1]);
+        myCurrentPercent = (double) getIntent().getExtras().get(FirstActivity.CURRENT_PERCENT_MESSAGE);
+        myRemainingProportion = (double) getIntent().getExtras().get(FirstActivity.REMAINING_PROPORTION_MESSAGE);
     }
 
     public void onButtonClick(View view) {
@@ -47,16 +44,17 @@ public class SecondActivity extends ActionBarActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 TextView gradeGoal = (TextView) findViewById(R.id.gradeGoal);
                 gradeGoal.setText(Integer.toString(seekBar.getProgress()));
-                setGradeRequired();
+                setGradeRequired(progress);
             }
         });
-        setGradeRequired();
+        setGradeRequired(sk.getProgress());
     }
 
-    private void setGradeRequired() {
-        TextView gradeRequired = (TextView) findViewById(R.id.gradeRequired);
-
-        
-
+    private void setGradeRequired(int gradeGoal) {
+        double gradeRequired = (gradeGoal - myCurrentPercent) / myRemainingProportion * 100.0;
+        gradeRequired = gradeRequired < 0 ? 0 : gradeRequired;
+        //gradeRequired = ((int) (gradeRequired * 100)) / 100.0;
+        TextView gradeRequiredTextView = (TextView) findViewById(R.id.gradeRequired);
+        gradeRequiredTextView.setText(gradeRequired + "%");
     }
 }
