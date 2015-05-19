@@ -55,7 +55,7 @@ public class SecondActivity extends ActionBarActivity {
     private void setGradeRequired(int gradeGoal) {
         double gradeRequired = calculateGradeRequired(gradeGoal);
         TextView gradeRequiredTextView = (TextView) findViewById(R.id.gradeRequired);
-        gradeRequiredTextView.setText(gradeRequired + "%");
+        gradeRequiredTextView.setText(gradeRequired + Constants.PERCENT_SYMBOL);
     }
 
     private double calculateGradeRequired(int gradeGoal) {

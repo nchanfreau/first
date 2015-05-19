@@ -12,5 +12,6 @@ public class Constants {
     public static final String PROPORTION_STRING = "Proportion";
     public static final String GRADE_STRING = "Grade";
     public static final String PERCENT_SYMBOL = "%";
+    public static final String TAB_SYMBOL = "\t";
     public static final int DECIMAL_INPUT_TYPE = InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER;
 }
