@@ -89,7 +89,8 @@
         android:layout_height="350dp"
         android:id="@+id/scrollView"
         android:layout_below="@+id/linearLayout0"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:isScrollContainer="false">
 
         <LinearLayout
             android:orientation="vertical"
