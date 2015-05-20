@@ -39,7 +39,11 @@ public class Row {
     }
 
     private double getDoubleValue(EditText et) {
-        return Double.parseDouble(getStringValue(et));
+        try {
+            return Double.parseDouble(getStringValue(et));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     private String getStringValue(EditText et) {

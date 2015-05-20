@@ -51,8 +51,8 @@ public class FirstActivity extends ActionBarActivity {
 
         int numRows = savedInstanceState.getInt(NUM_ROWS_MESSAGE);
 
-        EditText classesText = (EditText) this.findViewById(R.id.classesText);
-        classesText.setText(String.valueOf(numRows));
+        EditText sectionsText = (EditText) this.findViewById(R.id.sectionsText);
+        sectionsText.setText(String.valueOf(numRows));
 
         if (numRows > 0) {
             myRows = new ArrayList<>();
@@ -132,13 +132,13 @@ public class FirstActivity extends ActionBarActivity {
     }
 
     private int calculateNumRows() {
-        EditText classesText = (EditText) this.findViewById(R.id.classesText);
+        EditText sectionsText = (EditText) this.findViewById(R.id.sectionsText);
 
         try {
-            int num = Integer.parseInt(classesText.getText().toString());
+            int num = Integer.parseInt(sectionsText.getText().toString());
 
             if (num > MAX_SECTIONS) {
-                classesText.setText(String.valueOf(MAX_SECTIONS));
+                sectionsText.setText(String.valueOf(MAX_SECTIONS));
                 num = MAX_SECTIONS;
             }
 
