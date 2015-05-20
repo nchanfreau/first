@@ -20,12 +20,55 @@ public class FirstActivity extends ActionBarActivity {
     private static final String SAMPLE_PROPORTION = "20";
     private static final String SAMPLE_GRADE = "88";
 
+    private static final String PROPORTION_MESSAGE = "proportion";
+    private static final String GRADE_MESSAGE = "grade";
+    private static final String NUM_ROWS_MESSAGE = "numRows";
+
     private List<Row> myRows;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putInt(NUM_ROWS_MESSAGE, myRows.size());
+
+        for (int i = 0; i < myRows.size(); i++) {
+            savedInstanceState.putString(PROPORTION_MESSAGE + i,
+                    myRows.get(i).getProportionString());
+            savedInstanceState.putString(GRADE_MESSAGE + i,
+                    myRows.get(i).getGradeString());
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        int numRows = savedInstanceState.getInt(NUM_ROWS_MESSAGE);
+
+        EditText classesText = (EditText) this.findViewById(R.id.classesText);
+        classesText.setText(String.valueOf(numRows));
+
+        if (numRows > 0) {
+            myRows = new ArrayList<>();
+            for (int i = 0; i < numRows; i++) {
+                String proportionString = savedInstanceState.getString(PROPORTION_MESSAGE + i);
+                String gradeString = savedInstanceState.getString(GRADE_MESSAGE + i);
+                EditText proportion = makeEditText(proportionString,
+                        Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+                EditText grade = makeEditText(gradeString,
+                        Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+                myRows.add(new Row(proportion, grade));
+            }
+        }
+
+        addContent();
     }
 
     public void buttonOnClick(View v) {
@@ -46,16 +89,9 @@ public class FirstActivity extends ActionBarActivity {
         double currentPercent = 0;
         double remainingProportion = 100;
 
-        //for (int i = 1; i <= myNumRows; i++) {
         for (int i = 0; i < myRows.size(); i++) {
             double proportion = myRows.get(i).getProportion();
             double grade = myRows.get(i).getGrade();
-            /*
-            double proportion = Double.parseDouble(((EditText) findViewById(PROPORTION_AMT_ID + i)).
-                    getText().toString());
-            double grade = Double.parseDouble(((EditText) findViewById(GRADE_AMT_ID + i)).
-                    getText().toString());
-            */
             remainingProportion -= proportion;
             currentPercent += 0.01 * proportion * grade;
         }
@@ -68,12 +104,17 @@ public class FirstActivity extends ActionBarActivity {
 
     public void classesButtonOnClick(View v) {
         clearRows();
+        addContent();
+    }
+
+    private void addContent() {
         addTitleRow();
         addSectionRows(calculateNumRows());
     }
 
     private void clearRows() {
         ((LinearLayout) findViewById(R.id.linearLayout1)).removeAllViews();
+        myRows = null;
     }
 
     private void addTitleRow() {
@@ -104,24 +145,34 @@ public class FirstActivity extends ActionBarActivity {
     }
 
     private void addSectionRows(int num) {
-        myRows = new ArrayList<>();
+        if (myRows == null) {
+            createDefaultRows(num);
+        }
         for (int i = 1; i <= num; i++) {
             LinearLayout row = createSingleSectionRow(i);
             ((LinearLayout) findViewById(R.id.linearLayout1)).addView(row);
         }
     }
 
+    private void createDefaultRows(int numRows) {
+        myRows = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            EditText proportion = makeEditText(SAMPLE_PROPORTION,
+                    Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+            EditText grade = makeEditText(SAMPLE_GRADE,
+                    Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+            myRows.add(new Row(proportion, grade));
+        }
+    }
+
     private LinearLayout createSingleSectionRow(int i) {
         LinearLayout row = createLinearLayout();
         TextView section = makeSimpleTextView(Constants.SECTION_STRING + i, ROW_TEXT_SIZE);
-        EditText proportion = makeEditText(SAMPLE_PROPORTION,
-                Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+        EditText proportion = myRows.get(i - 1).getProportionView();
         TextView percent = makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE);
-        EditText grade = makeEditText(SAMPLE_GRADE,
-                Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+        EditText grade = myRows.get(i - 1).getGradeView();
         TextView percent2 = makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE);
 
-        myRows.add(new Row(proportion, grade));
         addToViewGroup(row, section, proportion, percent, grade, percent2);
 
         return row;
@@ -164,12 +215,36 @@ public class FirstActivity extends ActionBarActivity {
             myGrade = grade;
         }
 
+        public EditText getProportionView() {
+            return myProportion;
+        }
+
+        public EditText getGradeView() {
+            return myGrade;
+        }
+
+        public String getProportionString() {
+            return getStringValue(myProportion);
+        }
+
+        public String getGradeString() {
+            return getStringValue(myGrade);
+        }
+
         public double getProportion() {
-            return Double.parseDouble(myProportion.getText().toString());
+            return getDoubleValue(myProportion);
         }
 
         public double getGrade() {
-            return Double.parseDouble(myGrade.getText().toString());
+            return getDoubleValue(myGrade);
+        }
+
+        private double getDoubleValue(EditText et) {
+            return Double.parseDouble(getStringValue(et));
+        }
+
+        private String getStringValue(EditText et) {
+            return et.getText().toString();
         }
 
     }
