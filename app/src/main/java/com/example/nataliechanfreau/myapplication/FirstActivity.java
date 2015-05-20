@@ -133,14 +133,21 @@ public class FirstActivity extends ActionBarActivity {
 
     private int calculateNumRows() {
         EditText classesText = (EditText) this.findViewById(R.id.classesText);
-        int num = Integer.parseInt(classesText.getText().toString());
 
-        if (num > MAX_SECTIONS) {
-            classesText.setText(String.valueOf(MAX_SECTIONS));
-            num = MAX_SECTIONS;
+        try {
+            int num = Integer.parseInt(classesText.getText().toString());
+
+            if (num > MAX_SECTIONS) {
+                classesText.setText(String.valueOf(MAX_SECTIONS));
+                num = MAX_SECTIONS;
+            }
+
+            return num;
+
+        } catch (NumberFormatException e) {
+            return 0;
         }
 
-        return num;
     }
 
     private void addSectionRows(int num) {
