@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,10 +59,10 @@ public class FirstActivity extends ActionBarActivity {
             for (int i = 0; i < numRows; i++) {
                 String proportionString = savedInstanceState.getString(PROPORTION_MESSAGE + i);
                 String gradeString = savedInstanceState.getString(GRADE_MESSAGE + i);
-                EditText proportion = makeEditText(proportionString,
-                        Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
-                EditText grade = makeEditText(gradeString,
-                        Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+                EditText proportion = ViewMaker.makeEditText(proportionString,
+                        Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE, this);
+                EditText grade = ViewMaker.makeEditText(gradeString,
+                        Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE, this);
                 myRows.add(new Row(proportion, grade));
             }
         }
@@ -123,11 +122,11 @@ public class FirstActivity extends ActionBarActivity {
     }
 
     private LinearLayout createTitleRow() {
-        LinearLayout row = createLinearLayout();
+        LinearLayout row = ViewMaker.createLinearLayout(this);
         String title = Constants.SECTION_STRING + Constants.TAB_SYMBOL + Constants.PROPORTION_STRING +
                 Constants.TAB_SYMBOL + Constants.GRADE_STRING;
-        TextView titleView = makeSimpleTextView(title, TITLE_TEXT_SIZE);
-        addToViewGroup(row, titleView);
+        TextView titleView = ViewMaker.makeSimpleTextView(title, TITLE_TEXT_SIZE, this);
+        ViewMaker.addToViewGroup(row, titleView);
 
         return row;
     }
@@ -157,95 +156,28 @@ public class FirstActivity extends ActionBarActivity {
     private void createDefaultRows(int numRows) {
         myRows = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
-            EditText proportion = makeEditText(SAMPLE_PROPORTION,
-                    Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
-            EditText grade = makeEditText(SAMPLE_GRADE,
-                    Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE);
+            EditText proportion = ViewMaker.makeEditText(SAMPLE_PROPORTION,
+                    Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE, this);
+            EditText grade = ViewMaker.makeEditText(SAMPLE_GRADE,
+                    Constants.DECIMAL_INPUT_TYPE, ROW_TEXT_SIZE, this);
             myRows.add(new Row(proportion, grade));
         }
     }
 
     private LinearLayout createSingleSectionRow(int i) {
-        LinearLayout row = createLinearLayout();
-        TextView section = makeSimpleTextView(Constants.SECTION_STRING + i, ROW_TEXT_SIZE);
+        LinearLayout row = ViewMaker.createLinearLayout(this);
+        TextView section = ViewMaker.makeSimpleTextView(Constants.SECTION_STRING + i, ROW_TEXT_SIZE,
+                this);
         EditText proportion = myRows.get(i - 1).getProportionView();
-        TextView percent = makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE);
+        TextView percent = ViewMaker.makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE,
+                this);
         EditText grade = myRows.get(i - 1).getGradeView();
-        TextView percent2 = makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE);
+        TextView percent2 = ViewMaker.makeSimpleTextView(Constants.PERCENT_SYMBOL, ROW_TEXT_SIZE,
+                this);
 
-        addToViewGroup(row, section, proportion, percent, grade, percent2);
+        ViewMaker.addToViewGroup(row, section, proportion, percent, grade, percent2);
 
         return row;
     }
 
-    private void addToViewGroup(ViewGroup view, View ... children) {
-        for (View child : children) {
-            view.addView(child);
-        }
-    }
-
-    private LinearLayout createLinearLayout(){
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        return linearLayout;
-    }
-
-    private TextView makeSimpleTextView(String content, float textSize) {
-        TextView tv = new TextView(this);
-        tv.setText(content);
-        tv.setTextSize(textSize);
-        return tv;
-    }
-
-    private EditText makeEditText(String text, int inputType, float textSize) {
-        EditText et = new EditText(this);
-        et.setText(text);
-        et.setTextSize(textSize);
-        et.setInputType(inputType);
-        et.setSelectAllOnFocus(true);
-        return et;
-    }
-
-    public class Row {
-        private EditText myProportion;
-        private EditText myGrade;
-
-        public Row(EditText proportion, EditText grade) {
-            myProportion = proportion;
-            myGrade = grade;
-        }
-
-        public EditText getProportionView() {
-            return myProportion;
-        }
-
-        public EditText getGradeView() {
-            return myGrade;
-        }
-
-        public String getProportionString() {
-            return getStringValue(myProportion);
-        }
-
-        public String getGradeString() {
-            return getStringValue(myGrade);
-        }
-
-        public double getProportion() {
-            return getDoubleValue(myProportion);
-        }
-
-        public double getGrade() {
-            return getDoubleValue(myGrade);
-        }
-
-        private double getDoubleValue(EditText et) {
-            return Double.parseDouble(getStringValue(et));
-        }
-
-        private String getStringValue(EditText et) {
-            return et.getText().toString();
-        }
-
-    }
 }
