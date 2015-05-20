@@ -13,7 +13,6 @@ import java.util.List;
 
 
 public class FirstActivity extends ActionBarActivity {
-    private static final int MAX_SECTIONS = 7;
     private static final float ROW_TEXT_SIZE = 25;
     private static final float TITLE_TEXT_SIZE = 20;
     private static final String SAMPLE_PROPORTION = "20";
@@ -148,15 +147,7 @@ public class FirstActivity extends ActionBarActivity {
         EditText sectionsText = (EditText) this.findViewById(R.id.sectionsText);
 
         try {
-            int num = Integer.parseInt(sectionsText.getText().toString());
-
-            if (num > MAX_SECTIONS) {
-                sectionsText.setText(String.valueOf(MAX_SECTIONS));
-                num = MAX_SECTIONS;
-            }
-
-            return num;
-
+            return Integer.parseInt(sectionsText.getText().toString());
         } catch (NumberFormatException e) {
             return 0;
         }
