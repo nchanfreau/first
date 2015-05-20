@@ -35,13 +35,18 @@ public class FirstActivity extends ActionBarActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        savedInstanceState.putInt(NUM_ROWS_MESSAGE, myRows.size());
+        try {
+            savedInstanceState.putInt(NUM_ROWS_MESSAGE,
+                    myRows.size());
 
-        for (int i = 0; i < myRows.size(); i++) {
-            savedInstanceState.putString(PROPORTION_MESSAGE + i,
-                    myRows.get(i).getProportionString());
-            savedInstanceState.putString(GRADE_MESSAGE + i,
-                    myRows.get(i).getGradeString());
+            for (int i = 0; i < myRows.size(); i++) {
+                savedInstanceState.putString(PROPORTION_MESSAGE + i,
+                        myRows.get(i).getProportionString());
+                savedInstanceState.putString(GRADE_MESSAGE + i,
+                        myRows.get(i).getGradeString());
+            }
+        } catch (NullPointerException e) {
+            respondToNoUserInput();
         }
     }
 
@@ -71,15 +76,23 @@ public class FirstActivity extends ActionBarActivity {
     }
 
     public void buttonOnClick(View v) {
-        double[] result = doMathOnUserInput();
+        try {
+            double[] result = doMathOnUserInput();
 
-        double currentPercent = result[0];
-        double remainingProportion = result[1];
+            double currentPercent = result[0];
+            double remainingProportion = result[1];
 
-        Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra(Constants.CURRENT_PERCENT_MESSAGE, currentPercent);
-        intent.putExtra(Constants.REMAINING_PROPORTION_MESSAGE, remainingProportion);
-        startActivity(intent);
+            Intent intent = new Intent(this, SecondActivity.class);
+            intent.putExtra(Constants.CURRENT_PERCENT_MESSAGE, currentPercent);
+            intent.putExtra(Constants.REMAINING_PROPORTION_MESSAGE, remainingProportion);
+            startActivity(intent);
+        } catch (NullPointerException e) {
+            respondToNoUserInput();
+        }
+    }
+
+    private void respondToNoUserInput() {
+        // ignore their action for now
     }
 
     private double[] doMathOnUserInput() {

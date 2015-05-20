@@ -11,6 +11,7 @@ import java.math.RoundingMode;
 
 public class SecondActivity extends ActionBarActivity {
     private static final int NUM_DECIMALS_TO_ROUND = 2;
+    private static final double DELTA = 1.0/10000.0;
 
     private double myCurrentPercent;
     private double myRemainingProportion;
@@ -19,17 +20,26 @@ public class SecondActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
-        interpretMessage();
-        initializeSeekBar();
+        if (interpretAndVerifyMessage()) {
+            initializeSeekBar();
+        } else {
+            endActivity();
+        }
     }
 
-    private void interpretMessage() {
+    private boolean interpretAndVerifyMessage() {
         myCurrentPercent = (double) getIntent().getExtras().get(Constants.CURRENT_PERCENT_MESSAGE);
         myRemainingProportion = (double) getIntent().getExtras().get(Constants.REMAINING_PROPORTION_MESSAGE);
+
+        return !(myRemainingProportion <= DELTA || myCurrentPercent >= 100.0 - DELTA);
+    }
+
+    private void endActivity() {
+        this.finish();
     }
 
     public void onButtonClick(View view) {
-        this.finish();
+        endActivity();
     }
 
     private void initializeSeekBar() {
