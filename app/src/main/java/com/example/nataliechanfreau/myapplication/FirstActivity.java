@@ -191,4 +191,8 @@ public class FirstActivity extends ActionBarActivity {
         return row;
     }
 
+    public void helpButtonOnClick(View v) {
+
+    }
+
 }
