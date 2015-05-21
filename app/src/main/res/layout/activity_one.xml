@@ -23,14 +23,22 @@
             android:text="Calculate!"
             android:id="@+id/button"
             android:layout_below="@+id/textView2"
-            android:layout_marginTop="57dp"
-            android:onClick="buttonOnClick"
+            android:onClick="calculateButtonOnClick"
             android:layout_alignRight="@+id/gradeRequired"
             android:layout_alignEnd="@+id/gradeRequired"
             android:layout_alignLeft="@+id/gradeRequired"
             android:layout_alignStart="@+id/gradeRequired"
             android:layout_weight="0.03"
             android:layout_gravity="center_horizontal" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HELP"
+            android:background="@android:color/transparent"
+            android:id="@+id/helpButton"
+            android:textColor="#a5707070" />
 
     </LinearLayout>
 
@@ -75,22 +83,23 @@
                 android:layout_weight="0.23"></RelativeLayout>
 
             <Button
-                android:layout_width="56dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GO!"
                 android:id="@+id/classesButton"
-                android:onClick="classesButtonOnClick" />
+                android:onClick="sectionsButtonOnClick" />
 
         </LinearLayout>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="350dp"
+        android:layout_height="fill_parent"
         android:id="@+id/scrollView"
         android:layout_below="@+id/linearLayout0"
         android:layout_centerHorizontal="true"
-        android:isScrollContainer="false">
+        android:isScrollContainer="false"
+        android:layout_above="@+id/linearLayout2">
 
         <LinearLayout
             android:orientation="vertical"

@@ -74,7 +74,7 @@ public class FirstActivity extends ActionBarActivity {
         addContent();
     }
 
-    public void buttonOnClick(View v) {
+    public void calculateButtonOnClick(View v) {
         try {
             double[] result = doMathOnUserInput();
 
@@ -113,7 +113,7 @@ public class FirstActivity extends ActionBarActivity {
         return ret;
     }
 
-    public void classesButtonOnClick(View v) {
+    public void sectionsButtonOnClick(View v) {
         clearRows();
         addContent();
     }
